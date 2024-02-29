@@ -8,4 +8,4 @@ virtualenv==20.25.0
 virtualenvwrapper-win==1.2.7
 wheel==0.42.0
 fastapi
-uvircorn
+uvicorn
