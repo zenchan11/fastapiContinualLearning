@@ -7,3 +7,5 @@ setuptools==69.0.3
 virtualenv==20.25.0
 virtualenvwrapper-win==1.2.7
 wheel==0.42.0
+fastapi==0.110.0
+uvircorn==0.27.1
