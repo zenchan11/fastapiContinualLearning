@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upload</title>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <!-- Bootstrap CSS from CDN -->
+    {% comment %} <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> {% endcomment %}
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/plugins/animatecss/css/animate.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/styles.css' %}">
+    <style>
+      /* Style for Dropzone container */
+      .dropzone {
+          border: 2px dashed #0087F7;
+          border-radius: 8px;
+          background: #f0f0f0;
+          padding: 20px;
+          margin: 20px 0;
+      }
+  
+      /* Style for the "Select Image" label */
+      .form-group label {
+          font-weight: bold;
+      }
+  
+      /* Style for the upload button */
+      .form-group.text-center {
+          margin-top: 20px;
+      }
+  
+      .btn-primary {
+          background-color: #0087F7;
+          border-color: #0087F7;
+      }
+  
+      .btn-primary:hover {
+          background-color: #0066CC;
+          border-color: #0066CC;
+      }
+      .form-control-file {
+        display: block;
+        margin: 0 auto; /* This centers the input field horizontally */
+    }
+  </style>
+  
+</head>
+
+{% comment %} <body class="bg-dark-gradient"> {% endcomment %}
+<body >
+
+
+
+    <!-- Component Navigation 6 start -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-style-6 font-title py-3" style="background-image: url('{% static 'assets/img/backgrounds/monuments2.jpg' %}');">
+        <div class="container">
+        <a class="navbar-brand" href="#"><b>Monument Detection </b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent6" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent6">
+            <ul class="navbar-nav ml-auto">
+            <li class="nav-item active mx-2">
+                <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item mx-2">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+    <br><br>
+
+
+
+   <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Monument Detection</h1>
+                <h2>Upload Image</h2>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="{% url 'upload' %}" method="POST" enctype="multipart/form-data" class="dropzone"
+                id="my-awesome-dropzone">
+                    {% csrf_token %} <!-- This is the Django CSRF token -->
+
+                    <div class="form-group text-center">
+                      <label for="image" class="font-weight-bold d-block">Select Image:</label>
+                      <div class="mx-auto" style="width: fit-content;">
+                          <input type="file" class="form-control-file" id="image" name="image" required style="width:70%;">
+                      </div>
+                  </div>
+                  
+                   
+
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                    </div> 
+                </form>
+            </div>
+        </div>
+    </div> 
+    
+
+<br><br>
+<!-- Component Footer 10 start -->
+<footer class="footer-style-6 p-3 bg-hue-dark cwhite background-cover" style="background-image: url('{% static 'assets/img/backgrounds/monuments2.jpg' %}');">
+    <div class="row">
+      <div class="col-12 col-lg-3 my-1 text-center py-2">
+        <span class="font-title h5"><b>Monument </b>Detection</span><br>
+        <small class="lighter my-3 op-7 inline">Major Project</small>
+        <ul class="py-2 px-0">
+          <li class="inline"><a href="#" class=" circle btn-outline-primary btn m-1 inline"><i class="fa fa-google"></i></a></li>
+          <li class="inline"><a href="#" class=" circle btn-outline-primary btn m-1 inline"><i class="fa fa-twitter"></i></a></li>
+          <li class="inline"><a href="#" class=" circle btn-outline-primary btn m-1 inline"><i class="fa fa-instagram"></i></a></li>
+        </ul>
+      </div>
+      <div class="col-12 col-lg-6 my-1 text-left py-2 font-title">
+        <div class="row">
+          <div class="col-4">
+            <h6 class="uppercase py-1">Categories</h6>
+            <ul class="py-1 px-0">
+              <li><a href="#">Stupas</a></li>
+              <li><a href="#">shikhar</a></li>
+              <li><a href="#">mosque</a></li>
+              <li><a href="#">Monastery</a></li>
+            </ul>
+          </div>
+          <div class="col-4">
+            <h6 class="uppercase py-1">Features</h6>
+            <ul class="py-1 px-0">
+              <li><a href="#">Monument Detection</a></li>
+              <li><a href="#">ML</a></li>
+              {% comment %} <li><a href="#">    Continual Learning</a></li> {% endcomment %}
+
+            </ul>
+          </div>
+          <div class="col-4">
+            <h6 class="uppercase py-1">Technologies</h6>
+            <ul class="py-1 px-0">
+              <li><a href="#">Django</a></li>
+              <li><a href="#">pytorch</a></li>
+              <li><a href="#">Machine Learning</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-3 my-1 text-left py-2">
+        <h6 class="uppercase py-1">About</h6>
+        <small class="lighter my-3 op-7 inline font-body">This is a responsive website which aims to deliver Monement Detection of the given app</small>
+      </div>
+    <div class="col-12 ">
+      <div class="mline bg-light"></div>
+    </div>
+      <div class="col-6 py-2">
+              <small class="lighter op-7"></small>
+      </div>
+    </div>
+  </footer>
+  <!-- Component Footer 6 end -->
+  
+  <!-- Component Footer 7 end -->
+  <!-- Component Footer 10 end -->
+    <!-- Bootstrap JS and Popper.js from CDN -->
+    {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> {% endcomment %}
+
+
+<script src="{% static 'assets/plugins/jquery/jquery-3.2.0.min.js' %}"></script>
+<script src="{% static 'assets/plugins/popper/popper.js' %}"></script>
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'assets/js/script.js' %}"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-108011681-1"></script>
+<script>
+  {% comment %} $(document).ready(function(){
+    $('form input').change(function () {
+      $('form p').text(this.files.length + " file(s) selected");
+    });
+  }); {% endcomment %}
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-108011681-1');
+</script>
+
+<script>
+
+</script>
+
+<!-- Hotjar Tracking Code for underexpress.com -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:657265,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+</body>
+
+</html>

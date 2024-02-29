@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/css/loader.css' %}">
+    <title>Your Django App</title>
+</head>
+<body>
+
+    <!-- Your content goes here -->
+    <div id="loader" class="loader"></div>
+
+    <!-- Your main content -->
+    <div id="main-content">
+        <form id="your-form" method="post" action="{% url 'predict' %}">
+            {% csrf_token %}
+            <!-- Your form fields go here -->
+            <input type="hidden" name="image_path" value="C:\Users\DELL\MonumentDetection\media\images\boudha.jpg">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'assets/js/loader.js' %}"></script>
+    <script src="{% static 'assets/js/ajax-form-submission.js' %}"></script>
+</body>
+</html>
