@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Monuments Prediction</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/plugins/animatecss/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/assets/css/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-style-6 font-title py-3" style="background-image: url('{{ url_for("static", path="assets/img/backgrounds/monuments2.jpg") }}');">
+        <div class="container">
+            <a class="navbar-brand" href="#"><b>Monument Detection</b></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent6" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent6">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active mx-2">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br><br>
+    <section class="bg-light">
+        <div class="container">
+    
+            <div class="row">
+    
+    
+                <div class="col-12 col-lg-6 p-5 background-cover"  style="background-image:url('{{ url_for('media', path='images/') ~ img_name }}')">
+                    <div class="p-relative p-5 m-5"></div>
+    
+                </div>
+                <div class="col-12 col-lg-6 p-5">
+                 
+                    <div class="row mt-3">
+                        <div class="col-md-12 text-center">
+                            <form action="{{url_for('predict')}}" method="POST" enctype="multipart/form-data">
+                                <input type="hidden" name="image_path" value="{{ img_name }}">
+                                <h5>Choose the Model</h5>
+                                <input type="radio" name="model" value="base_model"> Base Model
+                                <input type="radio" name="model" value="meta_learning"> Meta learning
+                                <input type="radio" name="model" value="mnad"> MNAD
+                                <br><br>
+                              <div>                            
+                                <button type="submit" class="btn btn-primary">Predict Monument</button>
+                              </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-3">
+                        <div class="col-md-12 text-center">
+                            <a href="{{url_for('index')}}" class="btn btn-primary">Upload Another Image</a>
+                        </div>
+                    </div>
+                </div>
+             </div>
+            </div>
+        </div>
+    </section>
+<br><br>
+    <!-- Component Footer 10 start -->
+    <footer class="footer-style-6 p-3 bg-hue-dark cwhite background-cover" style="background-image: url('{{ url_for("static", path="assets/img/backgrounds/monuments2.jpg") }}');">
+        <div class="row">
+            <div class="col-12 col-lg-3 my-1 text-center py-2">
+                <span class="font-title h5"><b>Monument </b>Detection</span><br>
+                <small class="lighter my-3 op-7 inline">Major Project</small>
+                <ul class="py-2 px-0">
+                    <li class="inline"><a href="#" class=" circle btn-outline-primary btn m-1 inline"><i class="fa fa-google"></i></a></li>
+                    <li class="inline"><a href="#" class=" circle btn-outline-primary btn m-1 inline"><i class="fa fa-twitter"></i></a></li>
+                    <li class="inline"><a href="#" class=" circle btn-outline-primary btn m-1 inline"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-lg-6 my-1 text-left py-2 font-title">
+                <div class="row">
+                    <div class="col-4">
+                        <h6 class="uppercase py-1">Categories</h6>
+                        <ul class="py-1 px-0">
+                            <li><a href="#">Stupas</a></li>
+                            <li><a href="#">shikhar</a></li>
+                            <li><a href="#">mosque</a></li>
+                            <li><a href="#">Monastery</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <h6 class="uppercase py-1">Features</h6>
+                        <ul class="py-1 px-0">
+                            <li><a href="#">Monument Detection</a></li>
+                            <li><a href="#">ML</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-4">
+                        <h6 class="uppercase py-1">Technologies</h6>
+                        <ul class="py-1 px-0">
+                            <li><a href="#">Django</a></li>
+                            <li><a href="#">pytorch</a></li>
+                            <li><a href="#">Machine Learning</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-3 my-1 text-left py-2">
+                <h6 class="uppercase py-1">About</h6>
+                <small class="lighter my-3 op-7 inline font-body">This is a responsive website that detects monuments from the given image provided by the user.</small>
+            </div>
+            <div class="col-12 ">
+                <div class="mline bg-light"></div>
+            </div>
+            <div class="col-6 py-2">
+                <small class="lighter op-7"></small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

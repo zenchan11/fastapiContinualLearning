@@ -1,10 +1,12 @@
-from fastapi import FastAPI, Request, File, UploadFile
+from fastapi import FastAPI, Request, Form, UploadFile
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from pathlib import Path
 from monuments.faster_models.fasterrcnn import fasterrcnn_resnet50_fpn, filter_pred, classes, CLASSES
 import os
+import shutil
 import uvicorn
 from datetime import datetime
 import torch
@@ -16,6 +18,8 @@ import matplotlib.patches as patches
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/media", StaticFiles(directory="media"), name="media")
+
 templates = Jinja2Templates(directory="templates")
 
 
@@ -33,20 +37,38 @@ async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-@app.post("/upload")
-async def upload(request: Request, form: ImageForm = None):
-    if form:
-        image_path = f"media/images/{form.image.filename}"
-        with open(image_path, "wb") as image_file:
-            image_file.write(form.image.file.read())
-        return templates.TemplateResponse("upload.html", {"request": request, "form": form, "img_object": image_path})
-    return templates.TemplateResponse("image_form.html", {"request": request, "form": ImageForm()})
+# @app.post("/upload")
+# async def upload(request: Request, image: UploadFile = File(...)):
+#     print('reached')
+#     if image:
+#         image_path = f"media/images/{image.filename}"
+#         print(image_path)
+#         with open(image_path, "wb") as image_file:
+#             image_file.write(image.file.read())
 
+#         return templates.TemplateResponse("upload.html", {"request": request, "form": image, "img_object": image_path})
+    
+#     return templates.TemplateResponse("image_form.html", {"request": request, "form": image})
+@app.post("/upload")
+async def upload(request: Request,file: UploadFile):
+    upload_dir =  Path("media") / "images"
+    # Create the upload directory if it doesn't exist
+    upload_dir.mkdir(parents=True, exist_ok=True)
+
+    dest = upload_dir / file.filename
+    img_name = file.filename
+    print(dest)
+    # copy the file contents
+    with open(dest, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+
+    return templates.TemplateResponse("upload.html", {"request":request, "img_name": img_name })
 
 @app.post("/predict")
-async def predict(request: Request, image_path: str, model: str = "base_model"):
-    filename = os.path.basename(image_path)
+async def predict(request: Request, image_path: str = Form(...), model: str = "base_model"):
+    filename = image_path
     absolute_path = os.path.join("media", "images", filename)
+    print(absolute_path)
     if model == "base_model":
         image = Image.open(absolute_path).convert("RGB")
 
