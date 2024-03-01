@@ -100,4 +100,4 @@ async def predict(request: Request, image_path: str, model: str = "base_model"):
     return {"detail": "Invalid model specified."}
 
 if __name__ == '__main__':
-    uvicorn.run("app:app", reload=True)
+    uvicorn.run("main:app", reload=True)
