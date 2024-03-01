@@ -32,7 +32,7 @@ async def monuments(request: Request):
     return templates.TemplateResponse("welcome.html", {"request": request})
 
 
-@app.get("/index", response_class=HTMLResponse)
+@app.post("/index", response_class=HTMLResponse)
 async def index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
