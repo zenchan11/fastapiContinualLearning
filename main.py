@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from monuments.faster_models.fasterrcnn import fasterrcnn_resnet50_fpn, filter_pred, classes, CLASSES
 import os
+import uvicorn
 from datetime import datetime
 import torch
 import torchvision.transforms as transforms
@@ -97,3 +98,6 @@ async def predict(request: Request, image_path: str, model: str = "base_model"):
 
         return templates.TemplateResponse("predict.html", {"request": request, "image_path": image_path})
     return {"detail": "Invalid model specified."}
+
+if __name__ == '__main__':
+    uvicorn.run("app:app", host="0.0.0.0", port=8036, reload=True)
